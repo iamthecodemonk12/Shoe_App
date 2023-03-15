@@ -1,0 +1,172 @@
+{% load static %}
+{% url 'core_index' as home_link %}
+{% url 'products:all' as product_home %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <!-- =====BOX ICONS===== -->
+    <link href="{% static './assets/css/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+    <link href="{% static 'products/css/styles.css' %}" rel="stylesheet" />
+    <title>SHOE SELLING WEBSITE</title>
+</head>
+
+<body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar mb-md-3 bg-dark sticky-top">
+        <a class="navbar-brand mr-0 mr-md-2" href="{{ home_link }}" aria-label="{{ website_name }}" title=""><i class="fas fa-luggage-cart fa-1x"></i></a>
+
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ home_link }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ product_home }}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'admin:index' %}">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" target="_blank" rel="noopener">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" target="_blank" rel="noopener">Contact us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://blog.getbootstrap.com/" target="_blank" rel="noopener"> Sign in</a>
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a> -->
+                </li>
+            </ul>
+        </div>
+
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+            <li class="nav-item text-white">
+                <a class="nav-link" href="{% url 'products:cart' %}"><i class="fas fa-cart-plus"></i><span class="small">&nbsp;{{ cart|length }} items</span></a>
+            </li>
+        </ul>
+
+        <a class="btn btn-outline-light d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href=""><span class="fas fa-user fa-1x"></span> Sign in</a>
+    </header>
+    <div class="sec8 pb-0 mt-md-5 mt-0">
+        <div class="main no-bg d-flex flex-column shadow-sm px-0">
+            <!-- main-content -->
+            <div class="main-content pt-4 text-muted mt-3  px-md-5 px-3 {% if not view.has_results %} no-bg" style="background-image:url('{% static 'assets/svgs/plane-arrival.svg' %}')">{% else %}"{% endif %}>
+                <div class="product-entries">
+                    <div class="row">
+                        {% for product in products %}
+                        <div class="col-sm-4 col-xs-2 product-entry text-center mb-5">
+                            <div class="">
+                                <a href="{% url 'products:detail' product.pk %}" class="img mb-0 bg-light">
+                                    <img src="{{ product.getimage.image.url }}" alt="picture" class="w-100 mt-0">
+                                </a>
+                                <div class="py-3 bg-light">
+                                    <p class="mb-3 text-primary">${{ product.price }} <del class="text-mute small">{{ product.discount_rate }}</del></p>
+                                    <p>
+                                        <a class="btn btn-primary text-uppercase" href="#">Buy Now</a> <br> <br>
+                                        <a href="{% url 'products:cart_exec' product.pk 'add' %}" class="btn btn-outline-info">Add to Cart</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="main-footer mt-5 p-3 pt-2 rounded-bottom d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="h4 small">{% if view.has_results %}{{ page_obj.paginator.object_list|length }}{% else %}No{% endif %} results</h4>
+                </div>
+                <ul class="pagination pagination-sm ml-auto my-auto">
+                    {% if page_obj.paginator.num_pages > 1 %} {# only paginate when there is need #} {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number}}">Previous</a></li>
+                    {% endif %} {% for page in page_obj.paginator %} {% if page.number == page_obj.number %} {# active link #}
+                    <li class="page-item active">
+                        <span class="page-link">
+                                    {{ page.number }}
+                                    <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page.number }}">{{ page.number }}</a></li>
+                    {% endif %} {% endfor %} {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number}}">Next</a></li>
+                    {% endif %} {% endif %}
+                </ul>
+            </div>
+        </div>
+        <aside class="social-icons">
+            <div class="dropdown">
+                <button class="btn btn-primary rounded-circle toggler" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon fas fa-shopping-cart mt-auto img"></i>
+                    <i class="badge badge-default">3</i>
+                </button>
+                <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                    {% for product in products|slice:":3" %}
+                        <div class="dropdown-item px-0 w-100">
+                            <a href="{% url 'products:detail' product.id %}" class="img">
+                                <img class="img-content" id="{{ forloop.counter }}" src="{{ product.getimage.image.url }}" alt="thumbnail">
+                            </a>
+                        </div>  
+                    {% endfor %}
+                </div>
+                </div>
+        </aside>
+        <footer class="footer px  mt-5 mb-0" id="main_footer">
+            <div class="row links px-5 pt-5 pb-5">
+                <div class="sections col-lg-4 col-sm-4 col-12 mb-5 text-center text-lg-left">
+                    <h4>Section</h4>
+                    <p>
+                        <li><a href="#">Lorem, ipsum dolor.</a></li>
+                        <li><a href="#">Libero, facilis odio?</a></li>
+                        <li><a href="#">Itaque, vel explicabo.</a></li>
+                        <li><a href="#">Lorem, ipsum dolor.</a></li>
+                        <li><a href="#">Libero, facilis odio?</a></li>
+                        <li><a href="#">Itaque, vel explicabo.</a></li>
+                    </p>
+                </div>
+                <div class="sections col-lg-4 col-sm-4 col-12 mb-5 text-center text-lg-left">
+                    <h4>Section</h4>
+                    <p>
+                        <li><a href="#">Lorem, ipsum dolor.</a></li>
+                        <li><a href="#">Libero, facilis odio?</a></li>
+                        <li><a href="#">Itaque, vel explicabo.</a></li>
+                        <li><a href="#">Itaque, vel explicabo.</a></li>
+                    </p>
+                </div>
+                <div class="sections col-lg-4 col-sm-4 col-12 mb-5 text-center text-lg-left">
+                    <h4>Section</h4>
+                    <p>
+                        <li><a href="#">Lorem, ipsum dolor.</a></li>
+                        <li><a href="#">Libero, facilis odio?</a></li>
+                        <li><a href="#">Itaque, vel explicabo.</a></li>
+                        <div class="image-section">
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-intensive bg-dark text-white d-md-flex flex-space-between-v-mid px-5">
+                <p class="py-2 py-sm-0">copyrights &copysr; <strong>Andrew's store</strong></p>
+                <p class="bigandy-link">
+                    <a href="http://www.bigandy.com" class="img-link d-flex flex-space-between-v-mid position-relative">
+                        <span>Powered by bigandy</span>
+                        <img src="{% static 'assets/credits/img/ppx.jpg' %}" class="img d-inline-block ml-4 border border-white" alt="bigandy">
+                    </a>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script src="{% static './assets/js/jquery.js' %}"></script>
+    <script src="{% static './products_assets/js/popper.min.js' %}"></script>
+    <script src="{% static './assets/js/bootstrap.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>
+
+</html>

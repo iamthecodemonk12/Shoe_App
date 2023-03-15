@@ -1,0 +1,51 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block more_links %}    
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+<!--[if lt IE 9]>
+    <script src="{% static 'js/html5shiv.js' %}"></script>
+    <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+<!-- =======================================================
+      Theme Name: NiceAdmin
+      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+      Author: BootstrapMade
+      Author URL: https://bootstrapmade.com
+    ======================================================= -->
+{% endblock %}
+
+
+{% block body_content %} class="login-img3-body">
+    <div class="container">
+        {% if error %}
+        <div class="alert alert-info text-center fade in">
+            <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+            <p>Please check your input and try again! <strong>Note:</strong> that names are case sensitive</p>
+        </div>
+        {% endif %}
+        <form action="{% url 'customadmin:login' %}" class="login-form" method="POST">
+            {% csrf_token %}
+            <div class="login-wrap">
+                <p class="login-img"><i class="icon_lock_alt"></i></p>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon_profile"></i></span>
+                    <input autofocus="" class="form-control" placeholder="Username" type="text" name="Username" value="{{ request.POST.Username }}" />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                    <input class="form-control" placeholder="Password" type="password" name="Password" />
+                </div>
+                <label class="checkbox">
+                        <input type="checkbox" value="remember-me"/> Remember me
+                        <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+                    </label>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail | ${{ product.price }}</title>
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-title my-sm-3">
+                <div class="d-flex justify-content-between text-primary">
+                    <h1 class="h3 text-primary">Andrew Stores</h1>
+                    <div class="form">
+                        <!-- <form action="" class="form-inline">
+                            <div class="d-flex mt-1">
+                                <input type="text" class="form-control form-control-sm w-75" id='search'>
+                                <label for="search" class="btn btn-dark text-uppercase btn-sm rounded-0">search</label>
+                                <input type="submit" class="btn btn-primary text-uppercase btn-sm rounded-0" value="submit">
+                            </div>
+                        </form> -->
+                        <span class="fas fa-shopping-cart"></span> [3]
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <div class="container">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="nav1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shoes </a>
+                        <div class="dropdown-menu" aria-labelledby="nav1">
+                            <a class="dropdown-item" href="{% url 'products:all' %}">Men</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="nav2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages </a>
+                        <div class="dropdown-menu" aria-labelledby="nav2">
+                            <a class="dropdown-item" href="#">About</a>
+                            <a class="dropdown-item" href="#">Contact</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="detail mt-5 mb-5">
+            <div class="row w-75 mx-auto">
+                <div class="col-6">
+                    <div class="card ml-auto" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ product.price }}</h5>
+                            <hr>
+                            <a href="#" class="btn btn-primary mx-auto">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mx-">
+                        <h3 class="d-inline display-1"><sup>$</sup>29.5</h3> <del class="ml-5 text-secondary">$30.5</del>
+                        <div class="text-secondary mt-5 w-75">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        </div>
+                        <div class="x">
+                            <button class="btn btn-default">PURCHASE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.js' %}"></script>
+    <script src="{% static 'products_assets/js/popper.min.js' %}"></script>
+</body>
+
+</html>

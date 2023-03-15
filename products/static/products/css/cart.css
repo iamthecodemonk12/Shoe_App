@@ -1,0 +1,39 @@
+@import './styles.css';
+
+body{
+    background: var(--dark);
+}
+
+.main-container{
+    max-width: 900px;
+    height: 60vh;
+    min-height: calc(900px - 8rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-container .cart-view{
+    height: 100%;
+}
+
+.main-container .navbar{
+    background: linear-gradient(to right, transparent, var(--primary-transparent))!important;
+    border-radius: 4px;
+}
+
+.cart-view .products{
+    flex: 1;
+}
+
+.cart-view .side-bar{
+    text-align: center;
+    background-color: var(--primary-dark)
+}
+
+.cart-view .products{
+
+}
+
+.checkout {
+    color: white
+}

@@ -1,0 +1,31 @@
+{% load static %} {# main base template for admin #}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Creative - Bootstrap 3 Responsive Admin Template" name="description" />
+    <meta content="GeeksLabs" name="author" />
+    <meta content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal" name="keyword" />
+    <link href="{% static 'NiceAdmin/img/favicon.png' %}" rel="shortcut icon" />
+    <title>
+        {% block title %}Admin{% endblock %}
+    </title>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'products_assets/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <!-- bootstrap theme -->
+    <link href="{% static 'NiceAdmin/css/bootstrap-theme.css' %}" rel="stylesheet" />
+    <!--external css-->
+    <!-- font icon -->
+    <link href="{% static 'NiceAdmin/css/elegant-icons-style.css' %}" rel="stylesheet">
+    <link href="{% static 'NiceAdmin/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="{% static 'NiceAdmin/css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'NiceAdmin/css/style-responsive.css' %}" rel="stylesheet"> {% block more_links %} {% endblock %}
+</head>
+
+<body {% block body_content %} {% endblock %} </body>
+
+</html>

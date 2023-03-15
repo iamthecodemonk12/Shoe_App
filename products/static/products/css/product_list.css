@@ -1,0 +1,69 @@
+/*orange #f96d00*/
+body{
+	background: var(--white);
+	font-family: 'segoe ui', sans-serif;
+}
+
+.ftco-section .col-3{
+	width: 50px!important;
+}
+
+.product{
+	background: var(--white);
+	border-radius: 5px;
+}
+
+/*.product,*/
+.product *{
+	/*border: thin solid var(--light);*/
+}
+
+.product .img{
+	background-size: auto 100%;
+	background-position: top;
+}
+
+.product .btn{
+	font-family: tahoma, sans-serif;
+	font-weight: bold;
+	background: var(--yellow);
+	text-transform: uppercase!important;
+}
+
+.product .meta{
+	display: none!important;
+}
+
+
+/*pagination*/
+.paginate a,
+.paginate span{
+	border: 0!important;
+	border-radius: 0!important;
+	color: var(--secondary)!important;
+	background: var(--light)
+}
+.paginate li:focus-within a,
+.paginate li:hover a
+{
+	color: var(--danger)!important;
+	font-weight: bold;
+	background: var(--white)!important;
+	box-shadow: 0 0 3px #d1d1d1;
+}
+
+.paginate li:focus-within a{
+}
+.paginate .nav-side{
+	/*color: var(--dark)!important;*/
+	/*box-shadow: 0 0 3px #d1d1d1;*/
+	background: none;
+}
+
+.paginate .active span{
+	transform: scale(1.3);
+	color: white!important;
+	background: var(--dark)!important;
+	box-shadow: none;
+	opacity: .7;
+}

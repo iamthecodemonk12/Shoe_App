@@ -1,0 +1,51 @@
+{% extends "./base.html" %}
+{% load static %}
+
+
+{% block contents %}
+    <main class="main">
+        <div class="container-fluid">
+            <div class="cart-main px-2">
+                <div class="row">
+                    <div class="col-2 side-bar border border-light bg-light">x</div>
+                    <div class="col-10 block-content">
+                        <div class="row">
+                            {% if view.has_results %}
+                            <div class="main-content pt-4 text-muted mt-3  px-md-5 px-3">
+                                {% else %}
+                                <div class="main-content pt-4 text-muted mt-3  px-md-5 px-3 no-bg" style="background-image:url('{% static 'assets/svgs/plane-arrival.svg' %}')">
+                                    {% endif %}
+                                    <div class="product-entries">
+                                        <div class="row justify-content-around justify-content-xl-between">
+                                            {% for product, quantity in cart %}
+                                                <div class="col-md-5 col-sm-5 col-xs-2 product-entry text-center mb-5">
+                                                    <div class="d-flex">
+                                                        <a href="" class="img mb-0 bg-light">
+                                                            <img src="{{ product.images.all.0.image.url }}" alt="picture" class="w-100 mt-0">
+                                                        </a>
+                                                        <div class="details py-3 px-2 bg-ligh shadow d-flex flex-column">
+                                                            <p class="mb-3 text-primary">${{ product.price }} <del class="text-mute small">{{ product.discount_rate }}</del></p>
+                                                            <p class="x9">
+                                                                <input type="text" name="" id="" value="{{ quantity }}" class="border-bottom form-control form-control-sm text-secondary">
+                                                            </p>
+                                                            <p class="mt-auto">
+                                                                <a href="{% url 'products:cart_exec' product.id 'del' %}" class="">
+                                                                    <span class="btn btn-primary btn-sm">Delete</span>
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+    

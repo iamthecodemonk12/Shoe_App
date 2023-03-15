@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>product page</title>
+	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/product_detail.css' %}">
+</head>
+<body>
+	<div class="container bg-light">
+		<h2>Product</h2>
+		<hr>
+		<br>
+		<p>price <b>${{ product.price }}</b></p>
+		<img src="{{ product.image.url }}" width=300>
+		<br>
+		<p>Details</p>
+		<ul>
+			<li>size: {{ product.size }}</li>
+			<li>discount: {% if product.discount%}{{ product.discount }}%{% else %}No discount{% endif %}</li>
+		</ul>
+
+	</div>
+</body>
+</html>
